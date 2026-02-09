@@ -1,0 +1,30 @@
+# Dash and UI
+dash>=2.14.0
+dash-bootstrap-components>=1.5.0
+plotly>=5.18.0
+
+# Database
+sqlalchemy>=2.0.0
+alembic>=1.13.0
+
+# HTTP/API clients
+requests>=2.31.0
+httpx>=0.25.0
+
+# Chrono24 scraper
+chrono24>=0.3.0
+
+# Data processing
+pandas>=2.0.0
+
+# Environment variables
+python-dotenv>=1.0.0
+
+# Currency conversion
+forex-python>=1.8
+
+# Scheduling (for background jobs)
+apscheduler>=3.10.0
+
+# Production server
+gunicorn>=21.0.0

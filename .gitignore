@@ -1,0 +1,33 @@
+# Environment
+.env
+venv/
+.venv/
+
+# Database
+*.db
+*.sqlite
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+*.so
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Distribution
+dist/
+build/
+*.egg-info/
