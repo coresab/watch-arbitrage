@@ -136,6 +136,7 @@ def get_opportunities(brand_id=None, min_profit=0, min_roi=0, bp_status=None):
 
 def get_stats():
     """Get dashboard statistics."""
+    from sqlalchemy import func
     session = get_session()
 
     total_opps = session.query(ArbitrageOpportunity).filter(
@@ -144,10 +145,8 @@ def get_stats():
 
     total_listings = session.query(Listing).filter(Listing.is_active == True).count()
 
-    avg_profit = session.query(ArbitrageOpportunity).filter(
+    avg_profit = session.query(func.avg(ArbitrageOpportunity.estimated_profit)).filter(
         ArbitrageOpportunity.is_active == True
-    ).with_entities(
-        db.func.avg(ArbitrageOpportunity.estimated_profit)
     ).scalar() or 0
 
     session.close()

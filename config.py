@@ -36,6 +36,6 @@ class Config:
     }
 
     # Arbitrage thresholds
-    MIN_PROFIT_THRESHOLD = 200      # Minimum $ profit to flag
-    MIN_ROI_THRESHOLD = 0.05        # Minimum 5% ROI to flag
-    MIN_DISCOUNT_THRESHOLD = 0.10   # Minimum 10% below market to flag
+    MIN_PROFIT_THRESHOLD = 100      # Minimum $ profit to flag
+    MIN_ROI_THRESHOLD = 0.02        # Minimum 2% ROI to flag
+    MIN_DISCOUNT_THRESHOLD = 0.05   # Minimum 5% below market to flag
