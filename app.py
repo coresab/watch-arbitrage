@@ -18,6 +18,21 @@ from config import Config
 # Initialize database
 init_db()
 
+# Auto-seed if database is empty
+def auto_seed_if_needed():
+    """Seed the database if no brands exist."""
+    session = get_session()
+    brand_count = session.query(Brand).count()
+    session.close()
+
+    if brand_count == 0:
+        print("Database empty - running seed_data.py...")
+        from seed_data import seed_database
+        seed_database()
+        print("Seeding complete!")
+
+auto_seed_if_needed()
+
 # Initialize Dash app with Bootstrap theme
 app = dash.Dash(
     __name__,
