@@ -56,6 +56,16 @@ app.index_string = '''
             * {
                 font-family: Helvetica, Arial, sans-serif !important;
             }
+            /* Fix select dropdown text visibility in dark theme */
+            .form-select {
+                background-color: #375a7f !important;
+                color: white !important;
+                border-color: #4a6fa5 !important;
+            }
+            .form-select option {
+                background-color: #2c3034 !important;
+                color: white !important;
+            }
         </style>
     </head>
     <body>
