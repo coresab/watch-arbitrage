@@ -181,12 +181,10 @@ filter_bar = dbc.Card([
         dbc.Row([
             dbc.Col([
                 html.Label("Brand", className="text-muted small"),
-                dcc.Dropdown(
+                dbc.Select(
                     id="brand-filter",
                     options=[{"label": "All Brands", "value": ""}] + get_brands(),
-                    value="",
-                    placeholder="All Brands",
-                    className="mb-2"
+                    value=""
                 )
             ], md=3),
             dbc.Col([
@@ -194,7 +192,7 @@ filter_bar = dbc.Card([
                 dcc.Input(
                     id="min-profit-filter",
                     type="number",
-                    value=200,
+                    value=0,
                     min=0,
                     className="form-control"
                 )
@@ -204,14 +202,14 @@ filter_bar = dbc.Card([
                 dcc.Input(
                     id="min-roi-filter",
                     type="number",
-                    value=5,
+                    value=0,
                     min=0,
                     className="form-control"
                 )
             ], md=2),
             dbc.Col([
                 html.Label("Box & Papers", className="text-muted small"),
-                dcc.Dropdown(
+                dbc.Select(
                     id="bp-filter",
                     options=[
                         {"label": "All", "value": "all"},
@@ -220,8 +218,7 @@ filter_bar = dbc.Card([
                         {"label": "Box Only", "value": "box_only"},
                         {"label": "None", "value": "none"},
                     ],
-                    value="all",
-                    className="mb-2"
+                    value="all"
                 )
             ], md=3),
             dbc.Col([
