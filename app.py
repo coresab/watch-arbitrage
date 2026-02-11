@@ -404,21 +404,53 @@ def update_opportunities(n_clicks, n_intervals, brand_id, min_profit, min_roi, b
 )
 def run_scan(n_clicks):
     if n_clicks:
-        scanner = Scanner()
-        stats = scanner.scan_all_references()
+        try:
+            print("=== SCAN STARTED ===")
 
-        # Run arbitrage detection
-        session = get_session()
-        engine = ArbitrageEngine(session)
-        opportunities = engine.analyze_all()
-        session.close()
+            # Check database state
+            session = get_session()
+            brand_count = session.query(Brand).count()
+            ref_count = session.query(WatchReference).count()
+            print(f"Database state: {brand_count} brands, {ref_count} references")
+            session.close()
 
-        return dbc.Alert(
-            f"Scan complete! Found {len(opportunities)} opportunities from "
-            f"{stats['ebay_listings']} eBay + {stats['chrono24_listings']} Chrono24 listings.",
-            color="success",
-            dismissable=True
-        )
+            if ref_count == 0:
+                return dbc.Alert(
+                    "No watch references in database. Seeding failed.",
+                    color="danger"
+                )
+
+            print("Creating scanner...")
+            scanner = Scanner()
+
+            print("Starting scan_all_references...")
+            stats = scanner.scan_all_references()
+            print(f"Scan stats: {stats}")
+
+            # Run arbitrage detection
+            print("Running arbitrage detection...")
+            session = get_session()
+            engine = ArbitrageEngine(session)
+            opportunities = engine.analyze_all()
+            session.close()
+
+            print(f"=== SCAN COMPLETE: {len(opportunities)} opportunities ===")
+
+            return dbc.Alert(
+                f"Scan complete! Found {len(opportunities)} opportunities from "
+                f"{stats['ebay_listings']} eBay + {stats['chrono24_listings']} Chrono24 listings.",
+                color="success",
+                dismissable=True
+            )
+        except Exception as e:
+            import traceback
+            error_msg = traceback.format_exc()
+            print(f"=== SCAN ERROR ===\n{error_msg}")
+            return dbc.Alert(
+                f"Scan failed: {str(e)}",
+                color="danger",
+                dismissable=True
+            )
     return ""
 
 
